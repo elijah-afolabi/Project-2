@@ -8,11 +8,12 @@
 .data
 
 
-    .space 1001
+    
 Input:
-    .asciiz "\Input String\n"
-Output:
-    .asciiz "\Output String: "
+    .space 1001
+emptyError:	.asciiz "Invalid Input"
+tooLongError: .asciiz "Invalid Input"
+wrongBaseError:   .asciiz "Invalid Input"
    
 .text
 
