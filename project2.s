@@ -7,14 +7,13 @@
 
 .data
 
-insert_into:
-    .space 11
+
+    .space 1001
 Input:
     .asciiz "\Input String\n"
 Output:
     .asciiz "\Output String: "
-   size:
-   .word 10
+   
 .text
 
 main:
@@ -55,7 +54,17 @@ main:
 	
 
 
-        
+        obtainedLastValidCharacter:
+	sb $zero, 1($t1)
+	
+	checkLength:   #Count the characters in the string
+	move $a0, $t2
+	addi $t0, $t0, 0  #Initialize count to zero
+	addi $t1, $t1, 10  #Save line feed character to t1
+	add $t4, $t4, $a0  #Preserve the content of a0
+
+
+         
 
     
 
