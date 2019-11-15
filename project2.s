@@ -20,7 +20,7 @@ Output:
 main:
 
    
-    li $v0, 8   #loads the value 4 into register $v0 which is the op code for print string 
+    li $v0, 8   #loads the value 8 into register $v0 which is the op code for print string 
    
     la $a0, Input #load address Input from memory and store it into argument register 0
     
@@ -33,30 +33,6 @@ main:
      
      
       
-        
-        
-       # iterate over each character in string
-        
-       addi $t2, $t2, 10
-      
-       
-       loopstarts:
-       
-                  bge $t1, 10, displaySum
-                   la $t3, insert_into
-                   add $t3, $t3, $t1
-                  
-                 lb $t3,0($t3)
-                 move $t6, $t3
-                 
-                    addi $t1, $t1, 1
-                    j checkString
-       
-       loopstop:
-                 li $v0, 4
-                 la $a0, ($t7)
-                 syscall
-        
    
 
     checkString:
