@@ -129,9 +129,10 @@ main:
         
         baseError:
     
-    addi $t7, $t7, 0
-    
-    j loopstarts
+        li $v0, 4
+	la $a0, wrongBaseError
+	syscall
+	j exit
     
     
       
@@ -154,13 +155,15 @@ main:
     j nextStep
     aTop:
     addi $s4, $s4, -87
-        j nextStep
+       
 
 
         
         nextStep:
-        add $t7, $t7, $s4
-         j loopstarts
+        beq $s0, $s3, thirdPower
+	beq $s0, $s2, secondPower
+	beq $s0, $s1, firstPower
+	beq $s0, $s5, zeroPower
          
 
 displaySum:
