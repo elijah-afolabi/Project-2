@@ -173,6 +173,17 @@ nextStep:
 	beq $s0, $s2, secondPower
 	beq $s0, $s1, firstPower
 	beq $s0, $s5, zeroPower
+
+
+
+thirdPower:
+	li $s6, 17576
+	mult $s4, $s6
+	mflo $s7
+	add $t7, $t7, $s7
+	addi $s0, $s0, -1
+	addi $a0, $a0, 1
+	j convertString
          
 
 displaySum:
