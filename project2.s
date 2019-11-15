@@ -134,7 +134,7 @@ main:
 	syscall
 	j exit
     
-    conversionInitializations:
+conversionInitializations:
 	move $a0, $t4
 	addi $t7, $t7, 0  #Initialize decimal sum to zero
 	add $s0, $s0, $t0
@@ -145,29 +145,30 @@ main:
 	li $s5, 0
       
         
-        convert:
-    move $s4, $t5
-    
-    slti $t6, $s4, 58
-    bne $t6, $zero, zeroToNine
-    slti $t6, $s4, 81
-    bne $t6, $zero, AToP
-    slti $t6, $s4, 113
-    bne $t6, $zero, aTop
+ convertString:
+        lb $s4, 0($a0)
+	beqz $s4, displaySum
+	beq $s4, $t1, displaySum
+	slti $t6, $s4, 58
+	bne $t6, $zero, zeroToNine
+	slti $t6, $s4, 81
+	bne $t6, $zero, AToP
+	slti $t6, $s4, 113
+	bne $t6, $zero, aTop
 
-    zeroToNine:
+zeroToNine:
     addi $s4, $s4, -48
     j nextStep
-    AToP:
+AToP:
     addi $s4, $s4, -55
     j nextStep
-    aTop:
+aTop:
     addi $s4, $s4, -87
        
 
 
         
-        nextStep:
+nextStep:
         beq $s0, $s3, thirdPower
 	beq $s0, $s2, secondPower
 	beq $s0, $s1, firstPower
@@ -175,9 +176,9 @@ main:
          
 
 displaySum:
-li $v0, 1
-move $a0, $t7
-syscall
+       li $v0, 1
+       move $a0, $t7
+       syscall
 
 exit:
        li $v0, 10
