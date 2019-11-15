@@ -104,6 +104,8 @@ main:
     aTop:
     addi $s4, $s4, -87
         j nextStep
+
+
         
         nextStep:
         add $t7, $t7, $s4
@@ -111,13 +113,9 @@ main:
          
 
 displaySum:
-        la $a0, Output
-        li $v0, 4
-        syscall
-    li $v0, 1
-    la $a0, ($t7)
-    syscall
-
+li $v0, 1
+move $a0, $t7
+syscall
 
 exit:
        li $v0, 10
