@@ -19,17 +19,19 @@ Output:
 
 main:
 
+   
+    li $v0, 8   #loads the value 4 into register $v0 which is the op code for print string 
+   
     la $a0, Input #load address Input from memory and store it into argument register 0
-    li $v0, 4 #loads the value 4 into register $v0 which is the op code for print string
+    
+    li $a1, 1001
+
+
     syscall #reads register $v0 for op code, sees 4 and prints the string located in $a0
 
-       la $a0, insert_into
-       la $a1, 11
-       li $v0, 8
-       syscall
-
-     
       
+     
+     
       
         
         
