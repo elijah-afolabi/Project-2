@@ -31,7 +31,12 @@ main:
 
       
      
-     
+     removeLeading:                   #Remove leading spaces
+	li $t8, 32                       #Save space character to t8
+	lb $t9, 0($a0)
+	beq $t8, $t9, removeFirst
+	move $t2, $a0
+	j removeTrailing
       
    
 
