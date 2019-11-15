@@ -91,6 +91,11 @@ main:
 	syscall
 	j exit
 
+      lengthError:
+       li $v0, 4
+       la $a0, tooLongError
+        syscall
+       j exit
 
 
 
@@ -99,22 +104,27 @@ main:
    
 
     checkString:
-    move $t5, $t6
-    #beqz $t5, conversionInitializations  #End loop if null character is reached
-    #beq $t5, $t1, conversionInitializations  #End loop if end-of-line character is detected
-    slti $t6, $t5, 48    #Check if the character is less than 0 (Invalid input)
-    bne $t6, $zero, baseError
-    slti $t6, $t5, 58    #Check if the character is less than 58->9 (Valid input)
-    bne $t6, $zero, convert
-    slti $t6, $t5, 65    #Check if the character is less than 65->A (Invalid input)
-    bne $t6, $zero, baseError
-    slti $t6, $t5, 80    #Check if the character is less than 80->P(Valid input)
-    bne $t6, $zero, convert
-    slti $t6, $t5, 97    #Check if the character is less than 97->a(Invalid input)
-    bne $t6, $zero, convert
-    slti $t6, $t5, 113   #Check if the character is less than 112->p(Valid input)
-    bne $t6, $zero, convert
-    bgt $t5, 80, baseError #Check if the character is greater than 112->p(Invalid input)
+	lb $t5, 0($a0)
+	beqz $t5, conversionInitializations  #End loop if null character is reached
+	beq $t5, $t1, conversionInitializations  #End loop if end-of-line character is detected
+	slti $t6, $t5, 48    #Check if the character is less than 0 (Invalid input)
+	bne $t6, $zero, baseError
+	slti $t6, $t5, 58    #Check if the character is less than 58->9 (Valid input)
+	bne $t6, $zero, Increment
+	slti $t6, $t5, 65    #Check if the character is less than 65->A (Invalid input)
+	bne $t6, $zero, baseError
+	slti $t6, $t5, 81   #Check if the character is less than 80->Q(Valid input)
+	bne $t6, $zero, Increment
+	slti $t6, $t5, 97    #Check if the character is less than 97->a(Invalid input)
+	bne $t6, $zero, baseError
+	slti $t6, $t5, 113  #Check if the character is less than 113->q(Valid input)
+	bne $t6, $zero, Increment
+	bgt $t5, 112, baseError   #Check if the character is greater than 112->p(Invalid input)
+
+
+        Increment:
+	addi $a0, $a0, 1
+	j checkString
         
         
         baseError:
