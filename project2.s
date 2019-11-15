@@ -134,7 +134,15 @@ main:
 	syscall
 	j exit
     
-    
+    conversionInitializations:
+	move $a0, $t4
+	addi $t7, $t7, 0  #Initialize decimal sum to zero
+	add $s0, $s0, $t0
+	addi $s0, $s0, -1	
+	li $s3, 3
+	li $s2, 2
+	li $s1, 1
+	li $s5, 0
       
         
         convert:
