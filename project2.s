@@ -30,7 +30,7 @@ main:
 
       
      
-     removeLeading:                   #Remove leading spaces
+removeLeading:                   #Remove leading spaces
 	li $t8, 32                       #Save space character to t8
 	lb $t9, 0($a0)
 	beq $t8, $t9, removeFirst
@@ -38,12 +38,11 @@ main:
 	j removeTrailing
 
          
-
-      removeFirst:
+removeFirst:
 	addi $a0, $a0, 1
 	j removeLeading
 	
-	removeTrailing:
+removeTrailing:
 	li $t3, 10			      #Check for line feed character
 	lb $t9, 0($a0)
 	beqz $t9, obtainedLastValidCharacter 		  #End loop if null character is reached
@@ -54,10 +53,10 @@ main:
 	
 
 
-        obtainedLastValidCharacter:
+obtainedLastValidCharacter:
 	sb $zero, 1($t1)
 	
-	checkLength:   #Count the characters in the string
+checkLength:   #Count the characters in the string
 	move $a0, $t2
 	addi $t0, $t0, 0  #Initialize count to zero
 	addi $t1, $t1, 10  #Save line feed character to t1
@@ -66,7 +65,7 @@ main:
 
          
 
-         lengthLoop:
+lengthLoop:
 	lb $t2, 0($a0)   #Load the next character to t2
 	beqz $t2, done   #End loop if null character is reached
 	beq $t2, $t1, done   #End loop if end-of-line is detected
@@ -76,7 +75,7 @@ main:
 
 
 
-     finish:
+finish:
      beqz $t0, nullError   #Branch to null error if length is 0
      slti $t3, $t0, 5      #Check that count is less than 5
      beqz $t3, lengthError #Branch to length error if length is 5 or more
@@ -85,13 +84,13 @@ main:
 
      
 
-    nullError:
+nullError:
 	li $v0, 4
 	la $a0, emptyError
 	syscall
 	j exit
 
-      lengthError:
+lengthError:
        li $v0, 4
        la $a0, tooLongError
         syscall
@@ -102,8 +101,7 @@ main:
 
       
    
-
-    checkString:
+checkString:
 	lb $t5, 0($a0)
 	beqz $t5, conversionInitializations  #End loop if null character is reached
 	beq $t5, $t1, conversionInitializations  #End loop if end-of-line character is detected
@@ -122,12 +120,12 @@ main:
 	bgt $t5, 112, baseError   #Check if the character is greater than 112->p(Invalid input)
 
 
-        Increment:
+Increment:
 	addi $a0, $a0, 1
 	j checkString
         
         
-        baseError:
+baseError:
     
         li $v0, 4
 	la $a0, wrongBaseError
