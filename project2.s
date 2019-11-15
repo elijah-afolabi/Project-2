@@ -51,6 +51,11 @@ removeTrailing:
 	bne $t9, $t8, saveIndex
 	addi $a0, $a0, 1
 	j removeTrailing
+
+saveIndex:
+	move $t1, $a0
+	addi $a0, $a0, 1
+	j removeTrailing
 	
 
 
