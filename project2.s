@@ -37,6 +37,32 @@ main:
 	beq $t8, $t9, removeFirst
 	move $t2, $a0
 	j removeTrailing
+
+         
+
+      removeFirst:
+	addi $a0, $a0, 1
+	j removeLeading
+	
+	removeTrailing:
+	li $t3, 10			      #Check for line feed character
+	lb $t9, 0($a0)
+	beqz $t9, obtainedLastValidCharacter 		  #End loop if null character is reached
+    	beq $t9, $t3, obtainedLastValidCharacter         #End loop if end-of-line is detected
+	bne $t9, $t8, saveIndex
+	addi $a0, $a0, 1
+	j removeTrailing
+	
+
+
+        
+
+    
+
+
+
+
+
       
    
 
